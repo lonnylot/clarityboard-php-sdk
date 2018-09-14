@@ -1,0 +1,24 @@
+{
+    "name": "lonnylot/clarityboard-php-sdk",
+    "description": "Clarityboard SDK for PHP",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "php": "^5.4 || ^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lonny Kapelushnik",
+            "email": "lonny@clarityboard.com"
+        }
+    ],
+    "autoload": {
+      "prs-4": {
+        "Clarityboard\\": "src"
+      }
+    }
+}
