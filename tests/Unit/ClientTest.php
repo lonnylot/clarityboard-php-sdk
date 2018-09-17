@@ -13,7 +13,7 @@ class ClientTest extends TestCase {
     $this->expectException(Exception::class);
 
     // When
-    Client::setKey(1);
+    Client::setApiKey(1);
 
     // Then
     // Exception is thrown
@@ -35,10 +35,10 @@ class ClientTest extends TestCase {
     $key = 'abc123';
 
     // When
-    Client::setKey($key);
+    Client::setApiKey($key);
 
     // Then
-    $this->assertEquals(Client::getKey(), $key);
+    $this->assertEquals(Client::getApiKey(), $key);
   }
 
   public function testGetSetBaseUrl() {
@@ -52,12 +52,12 @@ class ClientTest extends TestCase {
     $this->assertEquals(Client::getBaseUrl(), $baseUrl);
   }
 
-  public function testMockRequest() {
+  public function testMockRequestSync() {
     // Given
-    Client::setKey('abc123');
+    Client::setApiKey('abc123');
 
     // When
-    $response = Client::request('GET', '/dashboard');
+    $response = Client::requestSync('GET', '/dashboard');
 
     // Then
     $this->assertEquals($response->getStatusCode(), 200);

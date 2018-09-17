@@ -76,7 +76,7 @@ class ReportTest extends TestCase {
       'rules' => []
     ];
     $body = json_encode($data);
-    Client::setKey('abc123');
+    Client::setApiKey('abc123');
     Client::getHandler()->setHandler(new MockHandler([
         new Response(201, ['X-Foo' => 'Bar'], Psr7\stream_for($body))
     ]));

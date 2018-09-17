@@ -14,10 +14,10 @@ use GuzzleHttp\Psr7;
 class RecordGroupTest extends TestCase {
   public function testAllSuccess() {
     // Given
-    Client::setKey('abc123');
+    Client::setApiKey('abc123');
 
     // When
-    $response = RecordGroup::all();
+    $response = RecordGroup::all()->wait();
 
     // Then
     $this->assertEquals($response->getStatusCode(), 200);
@@ -67,7 +67,7 @@ class RecordGroupTest extends TestCase {
       "cost" => 0.99
     ];
     $body = json_encode(['group' => $groupName, 'data' => $data]);
-    Client::setKey('abc123');
+    Client::setApiKey('abc123');
     Client::getHandler()->setHandler(new MockHandler([
         new Response(204, ['X-Foo' => 'Bar'], Psr7\stream_for($body))
     ]));

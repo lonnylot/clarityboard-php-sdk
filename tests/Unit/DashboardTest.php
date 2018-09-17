@@ -27,7 +27,7 @@ class DashboardTest extends TestCase {
     // Given
     $dashboardName = 'My Dashboard';
     $body = json_encode(['name' => $dashboardName]);
-    Client::setKey('abc123');
+    Client::setApiKey('abc123');
     Client::getHandler()->setHandler(new MockHandler([
         new Response(201, ['X-Foo' => 'Bar'], Psr7\stream_for($body))
     ]));
@@ -56,10 +56,10 @@ class DashboardTest extends TestCase {
     // Given
     $dashboardId = '12345-abcde';
     $body = json_encode(['dashboardId' => $dashboardId]);
-    Client::setKey('abc123');
+    Client::setApiKey('abc123');
 
     // When
-    $response = Dashboard::retrieve(['dashboardId' => $dashboardId]);
+    $response = Dashboard::retrieve(['dashboardId' => $dashboardId])->wait();
 
     // Then
     $this->assertEquals($response->getStatusCode(), 200);
@@ -71,10 +71,10 @@ class DashboardTest extends TestCase {
     // Given
     $dashboardId = '12345-abcde';
     $granularityId = 'weekly';
-    Client::setKey('abc123');
+    Client::setApiKey('abc123');
 
     // When
-    $response = Dashboard::retrieve(['dashboardId' => $dashboardId, 'granularityId' => $granularityId]);
+    $response = Dashboard::retrieve(['dashboardId' => $dashboardId, 'granularityId' => $granularityId])->wait();
 
     // Then
     $this->assertContains($granularityId, Client::getLatestRequestStats()->getEffectiveUri()->getQuery());
@@ -84,10 +84,10 @@ class DashboardTest extends TestCase {
     // Given
     $dashboardId = '12345-abcde';
     $timeframeId = 'four-weeks';
-    Client::setKey('abc123');
+    Client::setApiKey('abc123');
 
     // When
-    $response = Dashboard::retrieve(['dashboardId' => $dashboardId, 'timeframeId' => $timeframeId]);
+    $response = Dashboard::retrieve(['dashboardId' => $dashboardId, 'timeframeId' => $timeframeId])->wait();
 
     // Then
     $this->assertContains($timeframeId, Client::getLatestRequestStats()->getEffectiveUri()->getQuery());

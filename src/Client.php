@@ -21,7 +21,7 @@ class Client {
 
   protected $requestStats = [];
 
-  protected function setKey($key) {
+  protected function setApiKey($key) {
     if (!is_string($key)) {
       throw new Exception('Key must be a string.');
     }
@@ -49,7 +49,7 @@ class Client {
     return $this->handler;
   }
 
-  protected function getKey() {
+  protected function getApiKey() {
     if (is_null($this->key)) {
       throw new Exception('Key must be set via '.self::class.'::setKey()');
     }
@@ -67,7 +67,6 @@ class Client {
     switch ($method) {
       case 'GET':
       case 'HEAD': {
-        $requestMethodName = 'request';
         if (is_array($data)) {
           $uri = $uri->withQuery(http_build_query($data));
           $data = null;
@@ -75,7 +74,6 @@ class Client {
         break;
       }
       default: {
-        $requestMethodName = 'requestAsync';
         if (is_array($data)) {
           $data = json_encode($data);
         }
@@ -92,9 +90,9 @@ class Client {
 
     $client = new GuzzleClient($clientOptions);
 
-    return $client->{$requestMethodName}($method, $uri, [
+    return $client->requestAsync($method, $uri, [
       'headers' => [
-        'Authorization' => 'Bearer '.$this->getKey(),
+        'Authorization' => 'Bearer '.$this->getApiKey(),
         'Accept' => 'application/json',
         'Content-Type' => 'application/json',
         'User-Agent' => 'clarityboard-php-sdk/1.0'
@@ -103,6 +101,10 @@ class Client {
       'body' => $data,
       'on_stats' => [self::class, 'recordStats']
     ]);
+  }
+
+  protected function requestSync($method, $endpoint, $data = null) {
+    return $this->request($method, $endpoint, $data)->wait();
   }
 
   protected function recordStats(TransferStats $stats) {
