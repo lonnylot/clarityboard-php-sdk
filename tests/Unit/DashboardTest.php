@@ -12,6 +12,19 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7;
 
 class DashboardTest extends TestCase {
+  public function testAllSuccess() {
+    // Given
+    Client::setApiKey('abc123');
+
+    // When
+    $response = Dashboard::all()->wait();
+
+    // Then
+    $this->assertEquals($response->getStatusCode(), 200);
+    $this->assertEquals(Client::getLatestRequestStats()->getEffectiveUri()->getPath(), '/v/dashboards/');
+    $this->assertSame('', Client::getLatestRequestStats()->getRequest()->getBody()->getContents());
+  }
+
   public function testCreateWithoutName() {
     // Given
     $this->expectException(Exception::class);

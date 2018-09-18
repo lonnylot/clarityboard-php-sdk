@@ -12,6 +12,10 @@ class Dashboard {
 
   protected $baseEndpoint = 'dashboards/';
 
+  protected function all() {
+    return Client::request('GET', $this->baseEndpoint);
+  }
+
   protected function create($data) {
     if (!isset($data['name']) || !is_string($data['name'])) {
       throw new Exception('"name" is required. Please refer to the API documentation.');
