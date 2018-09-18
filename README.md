@@ -56,6 +56,12 @@ $response = \Clarityboard\Dashboard::retrieve(['dashboardId' => 'd290f1ee-6c54-4
 
 ### Dashboards
 
+#### List
+
+```php
+$response = \Clarityboard\Dashboard::all()->wait();
+```
+
 #### Create
 
 ```php
@@ -73,7 +79,7 @@ $response = \Clarityboard\Dashboard::retrieve(['dashboardId' => 'd290f1ee-6c54-4
 
 ```php
 \Clarityboard\Dashboard::create([
-  'group' => 'Sales', 
+  'group' => 'Sales',
   'data' => [
     "name" => "Shoe Laces",
     "sale" => 4.99,
