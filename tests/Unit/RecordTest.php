@@ -60,7 +60,7 @@ class RecordTest extends TestCase {
     ]));
 
     // When
-    $response = Record::create(['group' => $groupName, 'data' => $data])->wait();
+    $response = Record::create(['group' => $groupName, 'data' => $data]);
 
     // Then
     $this->assertEquals($response->getStatusCode(), 204);

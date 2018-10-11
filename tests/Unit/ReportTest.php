@@ -82,7 +82,7 @@ class ReportTest extends TestCase {
     ]));
 
     // When
-    $response = Report::create($data)->wait();
+    $response = Report::create($data);
 
     // Then
     $this->assertEquals($response->getStatusCode(), 201);

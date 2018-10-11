@@ -17,7 +17,7 @@ class RecordGroupTest extends TestCase {
     Client::setApiKey('abc123');
 
     // When
-    $response = RecordGroup::all()->wait();
+    $response = RecordGroup::all();
 
     // Then
     $this->assertEquals($response->getStatusCode(), 200);
@@ -73,7 +73,7 @@ class RecordGroupTest extends TestCase {
     ]));
 
     // When
-    $response = RecordGroup::update(['group' => $groupName, 'data' => $data])->wait();
+    $response = RecordGroup::update(['group' => $groupName, 'data' => $data]);
 
     // Then
     $this->assertEquals($response->getStatusCode(), 204);

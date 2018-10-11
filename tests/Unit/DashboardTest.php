@@ -17,7 +17,7 @@ class DashboardTest extends TestCase {
     Client::setApiKey('abc123');
 
     // When
-    $response = Dashboard::all()->wait();
+    $response = Dashboard::all();
 
     // Then
     $this->assertEquals($response->getStatusCode(), 200);
@@ -46,7 +46,7 @@ class DashboardTest extends TestCase {
     ]));
 
     // When
-    $response = Dashboard::create(['name' => $dashboardName])->wait();
+    $response = Dashboard::create(['name' => $dashboardName]);
 
     // Then
     $this->assertEquals($response->getStatusCode(), 201);
@@ -72,7 +72,7 @@ class DashboardTest extends TestCase {
     Client::setApiKey('abc123');
 
     // When
-    $response = Dashboard::retrieve(['dashboardId' => $dashboardId])->wait();
+    $response = Dashboard::retrieve(['dashboardId' => $dashboardId]);
 
     // Then
     $this->assertEquals($response->getStatusCode(), 200);
@@ -87,7 +87,7 @@ class DashboardTest extends TestCase {
     Client::setApiKey('abc123');
 
     // When
-    $response = Dashboard::retrieve(['dashboardId' => $dashboardId, 'granularityId' => $granularityId])->wait();
+    $response = Dashboard::retrieve(['dashboardId' => $dashboardId, 'granularityId' => $granularityId]);
 
     // Then
     $this->assertContains($granularityId, Client::getLatestRequestStats()->getEffectiveUri()->getQuery());
@@ -100,7 +100,7 @@ class DashboardTest extends TestCase {
     Client::setApiKey('abc123');
 
     // When
-    $response = Dashboard::retrieve(['dashboardId' => $dashboardId, 'timeframeId' => $timeframeId])->wait();
+    $response = Dashboard::retrieve(['dashboardId' => $dashboardId, 'timeframeId' => $timeframeId]);
 
     // Then
     $this->assertContains($timeframeId, Client::getLatestRequestStats()->getEffectiveUri()->getQuery());

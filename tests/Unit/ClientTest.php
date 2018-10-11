@@ -51,15 +51,4 @@ class ClientTest extends TestCase {
     // Then
     $this->assertEquals(Client::getBaseUrl(), $baseUrl);
   }
-
-  public function testMockRequestSync() {
-    // Given
-    Client::setApiKey('abc123');
-
-    // When
-    $response = Client::requestSync('GET', '/dashboard');
-
-    // Then
-    $this->assertEquals($response->getStatusCode(), 200);
-  }
 }

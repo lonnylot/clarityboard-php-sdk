@@ -90,7 +90,7 @@ class Client {
 
     $client = new GuzzleClient($clientOptions);
 
-    return $client->requestAsync($method, $uri, [
+    return $client->request($method, $uri, [
       'headers' => [
         'Authorization' => 'Bearer '.$this->getApiKey(),
         'Accept' => 'application/json',
@@ -101,10 +101,6 @@ class Client {
       'body' => $data,
       'on_stats' => [self::class, 'recordStats']
     ]);
-  }
-
-  protected function requestSync($method, $endpoint, $data = null) {
-    return $this->request($method, $endpoint, $data)->wait();
   }
 
   protected function recordStats(TransferStats $stats) {
